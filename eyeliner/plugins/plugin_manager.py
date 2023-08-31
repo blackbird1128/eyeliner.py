@@ -21,7 +21,7 @@ regex_converter = RegexConverter()
 
 def register_for(regex :str):
     """
-    Decorator to register a function to convert a regex to rgb
+    Decorator to register a function to convert a regex match to rgb
     The function must have the following signature:
     def func_to_rgb(code : str, regex: str) -> Tuple[int, int, int]:
     """

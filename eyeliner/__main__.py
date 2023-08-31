@@ -2,7 +2,7 @@ import argparse
 import sys
 from typing import Tuple
 import importlib
-import plugin_manager
+import plugins.plugin_manager as plugin_manager
 
 def hex_to_rgb(code : str, regex: str) -> Tuple[int, int, int]:
     """ Converts a hex code to rgb """
@@ -28,13 +28,15 @@ if __name__ == "__main__":
     parser.add_argument("--hex", "-x", help="Hex color regex",
                         action="store_true",default=True)
     args = parser.parse_args()
-    content = None   
+    content = None
 
     if args.plugin:
         for plugin in args.plugin:
             if not plugin.endswith(".py"):
                 raise ValueError("Plugin must be a python file")
-            importlib.import_module(plugin[:-3]) # Remove .py
+            plugin = plugin[:-3]
+            plugin = plugin.replace("/", ".")
+            importlib.import_module(plugin) # Remove .py
     if args.file:
         with open(args.file[0], "r") as f:
             content = f.read().strip()

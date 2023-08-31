@@ -6,7 +6,7 @@ more easily and make sense of color notations in files quickly.
 # Installation
 
 Simply clone this repos and add it to your path with an alias
-for `python3 eyeline.py`
+for `python3 eyeliner`
 
 
 # Usage

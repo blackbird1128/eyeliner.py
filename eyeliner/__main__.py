@@ -1,23 +1,8 @@
 import argparse
 import sys
-from typing import Tuple
 import importlib
 import plugins.plugin_manager as plugin_manager
-
-def hex_to_rgb(code : str, regex: str) -> Tuple[int, int, int]:
-    """ Converts a hex code to rgb """
-    code = code[1:]
-    r = int(code[0:2], 16)
-    g = int(code[2:4], 16)
-    b = int(code[4:6], 16)
-    return r, g, b
-
-def css_rgb(code : str, regex: str ) -> Tuple[int, int, int]:
-    """ Converts a css rgb code to rgb """
-    code = code[4:-1]
-    r, g, b = code.split(",")
-    return int(r), int(g), int(b)
-
+import colors.colors_converter as colors_converter
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Colors hex codes in a text file")
@@ -44,10 +29,10 @@ if __name__ == "__main__":
         content = sys.stdin.read().strip()
 
     if args.hex:
-        plugin_manager.register_for(r"(#[\da-fA-F]{6})")(hex_to_rgb)
+        plugin_manager.register_for(r"(#[\da-fA-F]{6})")(colors_converter.hex_to_rgb)
 
     if args.css:
-        plugin_manager.register_for(r"/rgb\((\d{3})\s*,\s*(\d{0,3})\s*,\s*(\d{3})\s*\)/gm")(css_rgb)
+        plugin_manager.register_for(r"/rgb\((\d{3})\s*,\s*(\d{0,3})\s*,\s*(\d{3})\s*\)/gm")(colors_converter.css_rgb)
 
     for regex in plugin_manager.regex_converter.regexes_dict:
         for x in plugin_manager.regex_converter.get_compiled_regex(regex)\

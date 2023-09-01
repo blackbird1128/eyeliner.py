@@ -1,0 +1,17 @@
+[project]
+name = "eyeliner"
+version = "0.0.1"
+description = "a quick solution to highlight patterns in files"
+readme="README.md"
+authors = [ { name="alex"} ] 
+
+
+classifiers = [
+    "Private :: Do Not Upload",
+]
+
+
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
